@@ -3,7 +3,7 @@ Example app implemented with rest api middlewares.
 To run this app install some psgi server starman, twiggy etc.
 All three middlewares:
  * Plack-Middleware-ParseContent
- * Plack-Middleware-RestAPI
+ * Plack-App-REST
  * Plack-Middleware-FormatOutput
 
 And html visualisator:
@@ -18,7 +18,7 @@ Install:
 
 2. Install middlewares
 
-	cpanm Plack-Middleware-ParseContent Plack-Middleware-RestAPI Plack-Middleware-FormatOutput
+	cpanm Plack-Middleware-ParseContent Plack-App-REST Plack-Middleware-FormatOutput
 
 3. Install gray pages (html visualiser)
 

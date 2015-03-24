@@ -3,9 +3,11 @@ package Api::Root;
 use strict;
 use warnings;
 
+use parent qw(Plack::App::REST);
+
 ### Handle GET api request
 sub GET {
-	my ($env) = @_;
+	my ($self, $env) = @_;
 
 	return {
 		user => 'test',
@@ -13,18 +15,18 @@ sub GET {
 		version => 'v1',
 		links => [
 			{
-				id => "temp",
-				name => "Manage temperature",
+				rel => "temp",
+				title => "Manage temperature",
 				href => "/api/v1/temp"
 			},
 			{
-				id => "history",
-				name => "Show temperature history",
+				rel => "history",
+				title => "Show temperature history",
 				href => "/api/v1/history"
 			},
 			{
-				id => "root",
-				name => "Root resource",
+				rel => "root",
+				title => "Root resource",
 				href => "/api/v1"
 			},
 		]

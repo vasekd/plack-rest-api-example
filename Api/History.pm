@@ -3,6 +3,8 @@ package Api::History;
 use strict;
 use warnings;
 
+use parent qw(Plack::App::REST);
+
 use POSIX qw( strftime );
 
 ### In real app this should be replaced with some type of database
@@ -10,7 +12,7 @@ my $FILEH = './hist.csv';
 
 ### Get request and return events as {date => value}
 sub GET {
-	my ($env, $data) = @_;
+	my ($self, $env, $data) = @_;
 
 	my $events;
 
@@ -27,8 +29,8 @@ sub GET {
 		events => $events,
 		links => [
 			{
-				id => "root",
-				name => "Root resource",
+				rel => "root",
+				title => "Root resource",
 				href => "/api/v1"
 			},
 		]

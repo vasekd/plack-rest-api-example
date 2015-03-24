@@ -3,13 +3,15 @@ package Api::Temp;
 use strict;
 use warnings;
 
+use parent qw(Plack::App::REST);
+
 ### In real app this should be replaced with some type of database
 my $FILEH = './hist.csv';
 my $FILEA = './actual';
 
 ### Get request and return actual temperature
 sub GET {
-	my ($env) = @_;
+	my ($self, $env, $param, $body) = @_;
 
 	# Get actual temperature from file
 	open FILEA, "<", $FILEA or die $!;
@@ -21,8 +23,8 @@ sub GET {
 		actual => $actual,
 		links => [
 			{
-				id => "root",
-				name => "Root resource",
+				rel => "root",
+				title => "Root resource",
 				href => "/api/v1"
 			},
 		]
@@ -45,7 +47,7 @@ sub GET_FORM {
 
 ### Manage POST with struct {value=>number, date=>timestamp}
 sub POST {
-	my ($env, $data) = @_;
+	my ($self, $env, $param, $data) = @_;
 
 	# Save actual value
 	open FILEH, ">", $FILEA or die $!;
@@ -61,8 +63,8 @@ sub POST {
 		actual => $data->{value},
 		links => [
 			{
-				id => "root",
-				name => "Root resource",
+				rel => "root",
+				title => "Root resource",
 				href => "/api/v1"
 			},
 		]
